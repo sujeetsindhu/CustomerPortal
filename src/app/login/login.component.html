@@ -1,0 +1,29 @@
+<app-header></app-header>
+<div class="container">
+  <div class="text-center">
+    <h1>
+      {{title}}
+    </h1>
+  </div>
+
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form-group">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" [(ngModel)]="user.email" name="email" #email='ngModel' class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+      <div *ngIf="email.touched && email.invalid " class="alert alert-danger">
+        <div *ngIf="email.errors.required">Email is required</div>
+        <div *ngIf="email.errors.pattern">Email Should be valid</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="text" [(ngModel)]="user.password" name="password" #password='ngModel' class="form-control" required>
+      <div *ngIf="password.touched && password.invalid " class="alert alert-danger">
+        <div *ngIf="password.errors.required">Password is required</div>
+      </div>
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-success">Signup</button>
+  </form>
+</div>
+
+<app-footer></app-footer>
